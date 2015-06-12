@@ -3,6 +3,7 @@
 namespace Ponticlaro\Bebop\Db;
 
 use Ponticlaro\Bebop\Common\Collection;
+use Ponticlaro\Bebop\Db;
 use Ponticlaro\Bebop\Db\Query\Arg;
 use Ponticlaro\Bebop\Db\Query\ArgFactory;
 

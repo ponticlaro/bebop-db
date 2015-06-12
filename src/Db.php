@@ -2,6 +2,8 @@
 
 namespace Ponticlaro\Bebop;
 
+use Ponticlaro\Bebop\Db\WpQueryEnhanced;
+
 class Db {
 
 	/**
