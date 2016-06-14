@@ -33,7 +33,7 @@ class WpQueryEnhanced {
      * 
      * @var \WP_Query
      */
-    protected $wp_query;
+    protected $query;
 
     /**
      * List of mapped arguments
@@ -270,6 +270,16 @@ class WpQueryEnhanced {
     public function execute()
     {
         return $this->__executeQuery();
+    }
+
+    /**
+     * Returns WP_Query object
+     * 
+     * @return mixed WP_Query object after query execution, null if before
+     */
+    public function getWpQuery()
+    {
+        return $this->query;
     }
 
     /**

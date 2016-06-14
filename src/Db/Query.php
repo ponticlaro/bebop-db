@@ -12,19 +12,20 @@ class Query {
     /**
      * List of arguments
      * 
-     * @var Ponticlaro\Bebop\Common\Collection
+     * @var object Ponticlaro\Bebop\Common\Collection
      */
     private $args;
 
     /**
      * Current argument being worked on
      * 
-     * @var Ponticlaro\Bebop\Db\Query\Arg
+     * @var object Ponticlaro\Bebop\Db\Query\Arg
      */
     private $current_arg;
 
     /**
      * Query Results
+     * 
      * @var array
      */
     private $query_results = array();
@@ -32,9 +33,23 @@ class Query {
     /**
      * List of arguments
      * 
-     * @var Ponticlaro\Bebop\Common\Collection
+     * @var object Ponticlaro\Bebop\Common\Collection
      */
     private $query_meta;
+
+    /**
+     * WpQueryEnhanced object
+     * 
+     * @var object Ponticlaro\Bebop\Db\WpQueryEnhanced
+     */
+    private $query;
+
+    /**
+     * WP_Query object
+     * 
+     * @var object WP_Query
+     */
+    private $wp_query;
 
     /**
      * Flag to check if query was already used to returns retults or not
@@ -247,7 +262,9 @@ class Query {
             $query_args = array_merge($query_args, $args);
 
         // Execute query
-        $data = Db::wpQuery($query_args)->setOption('with_meta', true)->execute();
+        $this->query    = (new WpQueryEnhanced($query_args))->setOption('with_meta', true);
+        $data           = $this->query->execute();
+        $this->wp_query = $this->query->getWpQuery();
 
         // Save query items
         if (isset($data['items']))
@@ -271,6 +288,26 @@ class Query {
     public function wasExecuted()
     {
         return $this->was_executed;
+    }
+
+    /**
+     * Returns WpQueryEnhanced object
+     * 
+     * @return object
+     */
+    public function getQuery()
+    {
+        return $this->query;
+    }
+
+    /**
+     * Returns WP_Query object
+     * 
+     * @return object
+     */
+    public function getWpQuery()
+    {
+        return $this->wp_query;
     }
 
     /**
