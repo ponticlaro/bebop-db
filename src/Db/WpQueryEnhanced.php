@@ -447,7 +447,7 @@ class WpQueryEnhanced {
                             $value        = $params[1];
                         }
 
-                        $data['value'] = $value;
+                        $data['value'] = stripslashes($value);
 
                         $this->clean_args->push($data, 'meta_query');
                     }
